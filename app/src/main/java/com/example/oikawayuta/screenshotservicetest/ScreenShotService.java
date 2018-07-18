@@ -21,6 +21,7 @@ public class ScreenShotService extends Service {
     private MediaProjection mProjection;
     private ImageReader imageReader;
     private VirtualDisplay virtualDisplay;
+    private ScreenShotThread screenShotThread;
 
     private int screenDensity;
     private int displayWidth;
@@ -43,9 +44,9 @@ public class ScreenShotService extends Service {
 
         // 画面の縦横サイズとdpを取得
         final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        screenDensity = displayMetrics.densityDpi;
-        displayWidth = displayMetrics.widthPixels;
-        displayHeight = displayMetrics.heightPixels;
+        screenDensity = displayMetrics.densityDpi / 2;
+        displayWidth = displayMetrics.widthPixels / 2;
+        displayHeight = displayMetrics.heightPixels / 2;
 
         Log.w(TAG, "onCreate");
     }
@@ -57,7 +58,8 @@ public class ScreenShotService extends Service {
         // setUp
         setUpMediaProjection(intent);
 
-        // TODO: run ScreenShot Thread
+        screenShotThread = new ScreenShotThread(imageReader);
+        screenShotThread.start();
 
         return START_STICKY;
     }
@@ -65,6 +67,7 @@ public class ScreenShotService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        screenShotThread.stopThread();
         Log.w(TAG, "OnDestroy");
     }
 

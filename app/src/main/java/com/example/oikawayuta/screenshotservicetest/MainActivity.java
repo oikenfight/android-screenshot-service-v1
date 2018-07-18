@@ -26,13 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        // 画面の縦横サイズとdpを取得
-//        DisplayMetrics displayMetrics = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-//        screenDensity = displayMetrics.densityDpi / 2;
-//        displayWidth = displayMetrics.widthPixels / 2;
-//        displayHeight = displayMetrics.heightPixels / 2;
-
         mpManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
 
         Button startButton = findViewById(R.id.button_start);
