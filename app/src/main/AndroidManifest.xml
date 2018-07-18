@@ -19,7 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="ScreenShotService"/>
+
+        <activity android:name=".TestActivity"></activity>
+
+        <service android:name=".ScreenShotService" />
+        <service
+            android:name=".TestService"
+            android:exported="true" />
     </application>
 
 </manifest>
