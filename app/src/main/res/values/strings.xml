@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ScreenShotServiceTest</string>
+    <string name="button_start">START</string>
+    <string name="button_stop">STOP</string>
+</resources>
