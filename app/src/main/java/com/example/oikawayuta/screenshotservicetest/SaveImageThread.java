@@ -22,6 +22,7 @@ public class SaveImageThread extends Thread implements Runnable {
         imgReader = imageReader;
     }
 
+    @Override
     public void run() {
         long before = System.currentTimeMillis();
 
