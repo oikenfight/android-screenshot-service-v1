@@ -64,7 +64,7 @@ public class ScreenShotService extends Service{
 
             Intent activityIntent = new Intent(this, MainActivity.class);
             activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getApplication().startActivity(activityIntent);
+            startActivity(activityIntent);
         }
 
         return START_STICKY;
@@ -73,6 +73,7 @@ public class ScreenShotService extends Service{
     @Override
     public void onDestroy() {
         super.onDestroy();
+        saveImageThread.stopThread();
         Log.w(TAG, "onDestroy");
     }
 
