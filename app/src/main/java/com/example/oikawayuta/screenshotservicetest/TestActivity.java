@@ -1,6 +1,8 @@
 package com.example.oikawayuta.screenshotservicetest;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,38 +14,45 @@ public class TestActivity extends AppCompatActivity {
     final static String TAG = "TestActivity";
     private static final int REQUEST_CODE_SCREEN_SHOT = 1001;
     private MediaProjectionManager mpManager;
+    private Intent permissionIntent;
+    public MediaProjection mProjection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        Log.w(TAG, "TestActivity onCreate");
+
         mpManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
 
-        final Intent permissionIntent = mpManager.createScreenCaptureIntent();
-        startActivityForResult(permissionIntent, REQUEST_CODE_SCREEN_SHOT);
-
-        Log.w(TAG, "TestActivity onCreate");
+        final Intent captureIntent = mpManager.createScreenCaptureIntent();
+        startActivityForResult(captureIntent, REQUEST_CODE_SCREEN_SHOT);
     }
 
     // ユーザーの許可を受け取る
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (REQUEST_CODE_SCREEN_SHOT == requestCode) {
             if (resultCode != RESULT_OK) {
+                Log.w(TAG, "activity request denied.");
                 // 拒否された
                 Toast.makeText(this,
                         "User cancelled", Toast.LENGTH_LONG).show();
                 return;
             }
-            startScreenShotService(resultCode, data);
+            Log.w(TAG, "activity request agreeded. start service");
+            startScreenShotService(resultCode, intent);
+
         }
     }
 
-    private void startScreenShotService(final int resultCode, final Intent data) {
-        final Intent intent = new Intent(this, ScreenShotService.class);
-        intent.putExtra(ScreenShotService.EXTRA_RESULT_CODE, resultCode);
-        intent.putExtras(data);
+    private void startScreenShotService(final int resultCode, final Intent captureIntent) {
+        final Intent intent = new Intent(this, TestService.class);
+        intent.putExtra(TestService.EXTRA_RESULT_CODE, resultCode);
+        intent.putExtras(captureIntent);
+
+        // TODO: TestService でスクリーンショットを実現する
         startService(intent);
     }
 }
