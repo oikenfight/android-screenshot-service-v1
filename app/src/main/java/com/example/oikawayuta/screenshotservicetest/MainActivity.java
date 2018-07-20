@@ -13,8 +13,6 @@ public class MainActivity extends AppCompatActivity {
     final static String TAG = "MainActivity";
     private static final int REQUEST_CODE_SCREEN_SHOT = 1001;
     private MediaProjectionManager mpManager;
-    private Intent permissionIntent;
-    public MediaProjection mProjection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
