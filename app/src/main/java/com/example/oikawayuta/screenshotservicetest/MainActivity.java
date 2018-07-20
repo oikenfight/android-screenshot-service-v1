@@ -1,14 +1,11 @@
 package com.example.oikawayuta.screenshotservicetest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -50,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startScreenShotService(final int resultCode, final Intent captureIntent) {
-        final Intent intent = new Intent(this, TestService.class);
-        intent.putExtra(TestService.EXTRA_RESULT_CODE, resultCode);
+        final Intent intent = new Intent(this, ScreenShotService.class);
+        intent.putExtra(ScreenShotService.EXTRA_RESULT_CODE, resultCode);
         intent.putExtras(captureIntent);
 
         startService(intent);

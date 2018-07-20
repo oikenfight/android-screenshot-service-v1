@@ -14,9 +14,9 @@ import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-public class TestService extends Service{
-    final static String TAG = "TestService";
-    private static final String BASE = "TestService.";
+public class ScreenShotService extends Service{
+    final static String TAG = "ScreenShotService";
+    private static final String BASE = "ScreenShotService.";
     public static final String EXTRA_RESULT_CODE = BASE + "EXTRA_RESULT_CODE";
 
     private MediaProjectionManager mpManager;
