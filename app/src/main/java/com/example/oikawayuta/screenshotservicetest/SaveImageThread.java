@@ -12,13 +12,13 @@ import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ScreenShotThread extends Thread implements Runnable {
+public class SaveImageThread extends Thread implements Runnable {
     private final String TAG = "ScreenShotService";
     private ImageReader imgReader;
     private boolean running = true;
     private long before;
 
-    ScreenShotThread(ImageReader imageReader) {
+    SaveImageThread(ImageReader imageReader) {
         imgReader = imageReader;
     }
 
@@ -70,7 +70,7 @@ public class ScreenShotThread extends Thread implements Runnable {
         this.running = false;
     }
 
-    protected void saveImage(Bitmap bitmap) {
+    private void saveImage(Bitmap bitmap) {
         try {
             // sdcardフォルダを指定
             File root = Environment.getExternalStorageDirectory();
@@ -100,13 +100,13 @@ public class ScreenShotThread extends Thread implements Runnable {
         }
     }
 
-    protected void VoidDiff(String tag) {
+    private void VoidDiff(String tag) {
         long now = System.currentTimeMillis();
         Log.w(tag, String.valueOf(now - before) + "ms");
         before = now;
     }
 
-    protected Image prepareImageReader() {
+    private Image prepareImageReader() {
         Image image = imgReader.acquireLatestImage();
         if (image == null) {
             try {

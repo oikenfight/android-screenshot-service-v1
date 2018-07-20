@@ -23,7 +23,7 @@ public class ScreenShotService extends Service{
     private MediaProjection mProjection;
     private ImageReader imageReader;
     private VirtualDisplay virtualDisplay;
-    private ScreenShotThread screenShotThread;
+    private SaveImageThread saveImageThread;
 
     private int screenDensity;
     private int displayWidth;
@@ -55,8 +55,8 @@ public class ScreenShotService extends Service{
             setDeviceDisplay();
             setUpMediaProjection(intent);
 
-            screenShotThread = new ScreenShotThread(imageReader);
-            screenShotThread.start();
+            saveImageThread = new SaveImageThread(imageReader);
+            saveImageThread.start();
 
         } else {
             // スクリーンショットが許可されていない場合 activity を起動して許可を取りに行く
