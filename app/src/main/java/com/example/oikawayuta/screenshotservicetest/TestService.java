@@ -62,7 +62,7 @@ public class TestService extends Service{
             // スクリーンショットが許可されていない場合 activity を起動して許可を取りに行く
             Log.w(TAG, "screen shot NG. start activity");
 
-            Intent activityIntent = new Intent(this, TestActivity.class);
+            Intent activityIntent = new Intent(this, MainActivity.class);
             activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplication().startActivity(activityIntent);
         }

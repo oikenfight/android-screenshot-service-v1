@@ -7,11 +7,13 @@ import android.media.projection.MediaProjectionManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
-public class TestActivity extends AppCompatActivity {
-    final static String TAG = "TestActivity";
+public class MainActivity extends AppCompatActivity {
+    final static String TAG = "MainActivity";
     private static final int REQUEST_CODE_SCREEN_SHOT = 1001;
     private MediaProjectionManager mpManager;
     private Intent permissionIntent;
@@ -22,7 +24,7 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        Log.w(TAG, "TestActivity onCreate");
+        Log.w(TAG, "MainActivity onCreate");
 
         mpManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
 
@@ -52,7 +54,6 @@ public class TestActivity extends AppCompatActivity {
         intent.putExtra(TestService.EXTRA_RESULT_CODE, resultCode);
         intent.putExtras(captureIntent);
 
-        // TODO: TestService でスクリーンショットを実現する
         startService(intent);
     }
 }
